@@ -21,6 +21,8 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+For local development, a secret key is generated automatically the first time Django starts and saved in the ignored `.django_secret_key` file. No environment setup is needed for `runserver`.
+
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) and sign in with the superuser credentials created above. The same account can access the Django admin at [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/).
 
 If PowerShell blocks virtual-environment activation, run the commands using `./.venv/Scripts/python.exe` instead of activating it, for example:
@@ -53,4 +55,4 @@ python manage.py test
 
 The project uses SQLite by default. The database and uploaded product images are local data and are excluded from Git by `.gitignore`. Static source files under `static/` are application assets and should remain tracked.
 
-The settings currently contain a development `SECRET_KEY` and have `DEBUG = True`. Before deployment, use a private environment-provided secret key, disable debug mode, configure allowed hosts, and review Django's deployment checklist.
+Settings read `DJANGO_SECRET_KEY`, `DJANGO_DEBUG`, and comma-separated `DJANGO_ALLOWED_HOSTS` from the process environment. In local development, Django creates a persistent key in the ignored `.django_secret_key` file if no key is configured. When `DJANGO_DEBUG` is `False`, an explicit `DJANGO_SECRET_KEY` is required. Before deployment, set a private secret key and production hosts, set `DJANGO_DEBUG` to `False`, and review Django's deployment checklist.

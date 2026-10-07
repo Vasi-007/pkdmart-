@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+
+                <h2>{{ page_title }}</h2>
+
+                <p class="text-muted mb-0">
+                    Enter product information below.
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'products:product_list' %}"
+                class="btn btn-outline-secondary"
+            >
+                Back
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <form
+                    method="post"
+                    enctype="multipart/form-data"
+                >
+
+                    {% csrf_token %}
+
+
+                    {% if form.non_field_errors %}
+
+                        <div class="alert alert-danger">
+
+                            {{ form.non_field_errors }}
+
+                        </div>
+
+                    {% endif %}
+
+                    <div class="mb-3">
+
+                        <label class="form-label">Product Name</label>
+
+                        {{ form.name }}
+
+                        {% for error in form.name.errors %}
+
+                            <div class="text-danger small">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">SKU</label>
+
+                        {{ form.sku }}
+
+                        {% for error in form.sku.errors %}
+
+                            <div class="text-danger small">{{ error }}</div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">Category</label>
+
+                            {{ form.category }}
+
+                            {% for error in form.category.errors %}
+
+                                <div class="text-danger small">{{ error }}</div>
+
+                            {% endfor %}
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">Price</label>
+
+                            {{ form.price }}
+
+                            {% for error in form.price.errors %}
+
+                                <div class="text-danger small">{{ error }}</div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">Stock Quantity</label>
+
+                        {{ form.stock }}
+
+                        {% for error in form.stock.errors %}
+
+                            <div class="text-danger small">{{ error }}</div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">Product Image</label>
+
+                        {{ form.image }}
+
+                        {% if product and product.image %}
+
+                            <div class="mt-2">
+
+                                <img
+                                    src="{{ product.image.url }}"
+                                    width="100"
+                                    class="rounded"
+                                >
+
+                                <p class="small text-muted">
+                                    Current image
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">Description</label>
+
+                        {{ form.description }}
+
+                        {% for error in form.description.errors %}
+
+                            <div class="text-danger small">{{ error }}</div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="form-check mb-4">
+
+                        {{ form.status }}
+
+                        <label class="form-check-label">Active Product</label>
+
+                    </div>
+
+
+                    <div class="d-flex gap-2">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            {{ button_text }}
+                        </button>
+
+                        <a
+                            href="{% url 'products:product_list' %}"
+                            class="btn btn-secondary"
+                        >
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

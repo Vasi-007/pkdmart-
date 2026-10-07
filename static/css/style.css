@@ -1,0 +1,39 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.dashboard-card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.table th {
+    white-space: nowrap;
+}
+
+.product-detail-image {
+    max-height: 250px;
+    object-fit: contain;
+}
+
+.no-image {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+    color: #777;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+
+    .table {
+        font-size: 14px;
+    }
+
+}
